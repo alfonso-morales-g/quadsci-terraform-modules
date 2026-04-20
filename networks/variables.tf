@@ -13,11 +13,6 @@ variable "vpc_name" {
   type    = string
 }
 
-variable "tags" {
-  default = null
-  type    = list(string)
-}
-
 variable "subnetworks" {
   default = null
   type = map(object({
