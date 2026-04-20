@@ -42,3 +42,25 @@ resource "google_compute_firewall" "vpc_firewall" {
   target_tags        = var.tags
   priority           = each.value.priority
 }
+
+resource "google_compute_router" "router" {
+  name    = "nat-router"
+  region  = var.region
+  network = google_compute_network.vpc_network.id
+
+  bgp {
+    asn = 64514
+  }
+}
+
+resource "google_compute_router_nat" "nat_gateway" {
+  name                               = "webapp-nat-gateway"
+  router                             = google_compute_router.router.name
+  region                             = var.region
+  nat_ip_allocate_option             = "MANUAL_ONLY"
+  source_subnetwork_ip_ranges_to_nat = "LIST_OF_SUBNETWORKS"
+  subnetwork {
+    name = google_compute_subnetwork.subnetwork["webapp-subnetwork"].name
+    source_ip_ranges_to_nat = google_compute_subnetwork.subnetwork["webapp-subnetwork"].ip_cidr_range
+  }
+}
