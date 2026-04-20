@@ -39,6 +39,7 @@ resource "google_compute_firewall" "vpc_firewall" {
 
   source_ranges      = each.value.source_ranges
   destination_ranges = each.value.destination_ranges
+  source_tags        = each.value.source_tags  
   target_tags        = each.value.target_tags
   priority           = each.value.priority
 }
