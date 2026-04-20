@@ -24,7 +24,7 @@ variable "subnetworks" {
 variable "firewall_rules" {
   default = null
   type = map(object({
-    name = string,
+    name      = string,
     direction = string,
     allow_rules = list(object({
       protocol = optional(string),
