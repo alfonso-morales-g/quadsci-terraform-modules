@@ -35,7 +35,7 @@ variable "firewall_rules" {
       ports    = optional(list(number))
     })),
     source_ranges      = list(string)
-    source_tags        = list(string)
+    source_tags        = optional(list(string))
     target_tags        = list(string)
     destination_ranges = list(string)
     priority           = number
