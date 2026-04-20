@@ -61,6 +61,6 @@ resource "google_compute_router_nat" "nat_gateway" {
   source_subnetwork_ip_ranges_to_nat = "LIST_OF_SUBNETWORKS"
   subnetwork {
     name = google_compute_subnetwork.subnetwork["webapp-subnetwork"].name
-    source_ip_ranges_to_nat = toset(google_compute_subnetwork.subnetwork["webapp-subnetwork"].ip_cidr_range)
+    source_ip_ranges_to_nat = toset([google_compute_subnetwork.subnetwork["webapp-subnetwork"].ip_cidr_range])
   }
 }
