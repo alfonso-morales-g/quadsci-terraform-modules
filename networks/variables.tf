@@ -41,3 +41,8 @@ variable "firewall_rules" {
     priority           = number
   }))
 }
+
+variable "nat_gateway_attach_instance" {
+  default = null
+  type = string
+}

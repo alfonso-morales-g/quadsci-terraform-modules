@@ -61,7 +61,7 @@ resource "google_compute_router_nat" "nat_gateway" {
   nat_ip_allocate_option             = "AUTO_ONLY"
   source_subnetwork_ip_ranges_to_nat = "LIST_OF_SUBNETWORKS"
   subnetwork {
-    name                    = google_compute_subnetwork.subnetwork["webapp-subnetwork"].name
-    source_ip_ranges_to_nat = toset([google_compute_subnetwork.subnetwork["webapp-subnetwork"].ip_cidr_range])
+    name                    = var.nat_gateway_attach_instance == "webapp" ? google_compute_subnetwork.subnetwork["webapp-subnetwork"].name : google_compute_subnetwork.subnetwork["development-subnetwork"].name
+    source_ip_ranges_to_nat = var.nat_gateway_attach_instance == "webapp" ? toset([google_compute_subnetwork.subnetwork["webapp-subnetwork"].ip_cidr_range]) : toset([google_compute_subnetwork.subnetwork["development-subnetwork"].ip_cidr_range])
   }
 }
