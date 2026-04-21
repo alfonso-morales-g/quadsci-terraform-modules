@@ -5,6 +5,7 @@ resource "google_compute_instance" "instance" {
   machine_type = "e2-medium"
   tags         = each.value.tags
   zone         = "us-central1-a"
+  hostname     = "${each.value.name}.internal"
 
   boot_disk {
     initialize_params {
