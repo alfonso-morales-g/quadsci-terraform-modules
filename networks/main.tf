@@ -55,7 +55,7 @@ resource "google_compute_router" "router" {
 }
 
 resource "google_compute_router_nat" "nat_gateway" {
-  name                               = "webapp-nat-gateway"
+  name                               = "${var.nat_gateway_attach_instance}-nat-gateway"
   router                             = "nat-router"
   region                             = var.region
   nat_ip_allocate_option             = "AUTO_ONLY"
